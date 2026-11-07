@@ -1,0 +1,250 @@
+
+.my-resources-page {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.my-resources-heading {
+    margin-bottom: 30px;
+}
+
+.my-resources-heading h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #312e81;
+}
+
+.my-resources-heading p {
+    color: #f8f5e9;
+}
+
+.my-resources-tabs {
+    display: flex;
+    gap: 25px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 25px;
+}
+
+.my-resources-tabs button {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 12px 5px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font: inherit;
+}
+
+.my-resources-tabs button.active {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+}
+
+.my-resources-tabs button span {
+    background: #eee;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.my-resources-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.my-resources-list-header h2 {
+    font-size: 19px;
+}
+
+.my-resources-list-header span {
+    color: #777;
+    font-size: 14px;
+}
+
+.my-resource-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.my-resource-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f4ff;
+    color: #2563eb;
+    padding: 12px;
+    border-radius: 9px;
+}
+
+.my-resource-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.my-resource-info h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.my-resource-info p {
+    font-size: 13px;
+    color: #777;
+}
+
+.my-resource-meta span {
+    background: #f1f1f1;
+    padding: 5px 9px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.my-resource-view a,
+.my-resource-actions button,
+.remove-saved {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 7px;
+}
+
+.my-resource-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.my-resource-actions button:hover,
+.my-resource-view a:hover {
+    color: #2563eb;
+}
+
+.my-resource-actions .delete-resource:hover {
+    color: #dc2626;
+}
+
+.remove-saved {
+    color: #2563eb;
+}
+
+.empty-my-resources {
+    text-align: center;
+    padding: 60px 20px;
+    color: #777;
+}
+
+.empty-my-resources svg {
+    margin-bottom: 15px;
+}
+
+.empty-my-resources h3 {
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.edit-resource-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.edit-resource-form {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 25px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.edit-resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-resource-header button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.edit-resource-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.edit-resource-form input,
+.edit-resource-form textarea,
+.edit-resource-form select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font: inherit;
+}
+
+.edit-resource-form textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.edit-resource-note {
+    font-size: 13px;
+    color: #777;
+}
+
+.edit-resource-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.edit-resource-actions button {
+    padding: 11px 17px;
+    border-radius: 7px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background: white;
+}
+
+.edit-resource-actions button[type="submit"] {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+@media (max-width: 600px) {
+    .my-resource-item {
+        flex-wrap: wrap;
+    }
+
+    .my-resource-info {
+        flex-basis: 60%;
+    }
+
+    .my-resource-actions {
+        margin-left: auto;
+    }
+}

@@ -1,16 +1,18 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import './Header.css'
-import { Plus, FilePlus, NotebookPen, MessageCircle } from 'lucide-react'
+import { Plus, FilePlus, NotebookPen, MessageCircle, BookOpen } from 'lucide-react'
 
 
 const Header = () => {
 
     const [isOpen, setIsOpen] = useState(false)
 
+    const navigate = useNavigate();
+
   return (
     <header className="Header">
-      <img src="/SRLogo.png" alt="Student Resource Hub" className="logo" />
+      <img src="/SRLogo2.png" alt="Student Resource Hub" className="logo" />
       <nav className="header-contents" aria-label="Main navigation">
         <ul className="menu">
           <li>
@@ -29,19 +31,19 @@ const Header = () => {
 
             {isOpen && (
                 <div className="dropdown-menu">
-                    <button type="button">
-                        <FilePlus className='add-resource'/>
-                        <span>Add Resources</span>
+                    <button type="button" onClick={() => navigate('/add-resource')}>
+                          <FilePlus className='add-resource'/>
+                          <span>Add Resources</span>                        
                     </button>
 
-                    <button type='button'>
+                    <button type='add-note'>
                         <NotebookPen className='add-note'/>
                         <span>Add Note</span>
                     </button>
 
-                    <button type='button'>
-                        <MessageCircle className='join-discussion'/>
-                        <span>Join Discussion</span>
+                    <button type='button' onClick={() => navigate('/my-resources')}>
+                        <BookOpen className='my-resources'/>
+                        <span>My Resources</span>
                     </button>
                 </div>
             )}

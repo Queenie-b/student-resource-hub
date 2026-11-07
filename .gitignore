@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Resource PDFs (stored locally for now)
+/public/resources/*.pdf

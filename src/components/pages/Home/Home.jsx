@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { ArrowRight, BookOpen, FileText, Search, Video } from 'lucide-react'
+import { Link, NavLink } from 'react-router-dom'
 import './Home.css'
 
 const resources = [
@@ -18,13 +19,13 @@ const Home = () => {
   }, [query])
 
   return (
-    <main className="home-page">
+    <main className="home-page page-fade">
       <section className="home-hero" aria-labelledby="home-title">
         <div className="hero-copy">
           <p className="eyebrow">STUDENT RESOURCE HUB</p>
           <h1 id="home-title">Make your next<br />big idea happen.</h1>
           <p className="hero-description">Find study guides, scholarships, templates, and people to help you move forward.</p>
-          <a className="hero-cta" href="#resources">Explore resources <ArrowRight size={18} aria-hidden="true" /></a>
+          <Link className="hero-cta" to="/resources">Explore resources <ArrowRight size={18} aria-hidden="true" /></Link>
         </div>
         <div className="hero-art" aria-hidden="true">
           <div className="art-orbit orbit-one" />
@@ -56,7 +57,9 @@ const Home = () => {
                 <p className="resource-type">{type}</p>
                 <h3>{title}</h3>
                 <p className="resource-detail">{detail}</p>
-                <a href="#resources" className="resource-link">Explore <ArrowRight size={16} aria-hidden="true" /></a>
+                <NavLink className="link-to-resources" to="/resources">
+                  Explore <ArrowRight size={16} aria-hidden="true" />
+                </NavLink>
               </article>
             ))}
           </div>

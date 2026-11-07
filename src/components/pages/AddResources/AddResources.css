@@ -1,0 +1,127 @@
+.add-resources-page {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 10px;
+}
+
+.add-resources-heading {
+    margin: 30px;
+}
+
+.add-resources-heading h1{
+    color: #28213e;
+}
+
+.add-resources-heading p {
+    color: #564c77;
+}
+
+.add-resource-form{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    flex: 1;
+}
+
+.form-group label{
+
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font: inherit;
+    background: #6366f1;
+}
+
+.form-group ::placeholder{
+    color: #f8f5e9;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+}
+
+.form-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.source-options {
+    display: flex;
+    gap: 12px;
+}
+
+.source-options button {
+    padding: 11px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #312e81;
+    cursor: pointer;
+}
+
+.source-options button.active {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+.selected-file {
+    font-size: 13px;
+    color: #9db2d1;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.form-actions button {
+    padding: 12px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+}
+
+.cancel-btn {
+    border: 1px solid #ddd;
+    background: #c54a5a;
+}
+
+.submit-btn {
+    border: none;
+    background: #a78bfa;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        flex: 1;
+    }
+}
