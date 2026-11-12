@@ -17,7 +17,7 @@
 
 .resources-heading h1 {
   margin: 0 0 8px;
-  color: #28213e;
+  color: #302a42;
   font-size: clamp(34px, 5vw, 48px);
   font-weight: 750;
   letter-spacing: -1.5px;
@@ -40,7 +40,7 @@
   border: 1px solid #e5e0ee;
   border-radius: 12px;
   background: #fff;
-  color: #8063be;
+  color: #7857c5;
   box-shadow: 0 4px 14px rgba(45, 33, 71, .035);
   box-sizing: border-box;
   transition: border-color 160ms ease, box-shadow 160ms ease;
@@ -85,7 +85,7 @@
 
 .resource-categories button {
   padding: 8px 14px;
-  border: 1px solid #e6e0f0;
+  border: 1px solid #e5e0ee;
   border-radius: 999px;
   background: #fff;
   color: #6e687c;
@@ -129,7 +129,7 @@
 }
 
 .resources-list-header span {
-  color: #827b90;
+  color: #777185;
   font-size: 13px;
 }
 
@@ -147,7 +147,7 @@
   min-height: 94px;
   margin: 0;
   padding: 18px 20px;
-  border: 1px solid #ebe8f0;
+  border: 1px solid #e5e0ee;
   border-radius: 15px;
   background: #fff;
   box-shadow: 0 5px 18px rgba(45, 33, 71, .035);
@@ -169,23 +169,23 @@
   place-items: center;
   border-radius: 13px;
   background: #f0eaff;
-  color: #7959bf;
+  color: #7857c5;
 }
 
 .resource-icon svg { width: 22px; height: 22px; }
 
 .resource-info { min-width: 0; flex: 1; }
 .resource-info h3 { margin: 0 0 6px; color: #302a42; font-size: 15px; font-weight: 700; line-height: 1.4; overflow-wrap: anywhere; }
-.resource-info p { color: #80798e; font-size: 13px; }
+.resource-info p { color: #777185; font-size: 13px; }
 
 .resource-meta span {
   display: inline-flex;
   align-items: center;
   padding: 6px 10px;
-  border: 1px solid #e8e2f1;
+  border: 1px solid #e5e0ee;
   border-radius: 8px;
   background: #faf8fd;
-  color: #7054b1;
+  color: #302a42;
   font-size: 11px;
   font-weight: 750;
   letter-spacing: .5px;
@@ -202,7 +202,7 @@
   text-align: center;
 }
 
-.empty-resources svg { width: 30px; height: 30px; margin-bottom: 4px; color: #8d70c9; }
+.empty-resources svg { width: 30px; height: 30px; margin-bottom: 4px; color: #7857c5; }
 .empty-resources h3 { margin: 0; color: #302a42; font-size: 17px; }
 .empty-resources p { font-size: 14px; }
 

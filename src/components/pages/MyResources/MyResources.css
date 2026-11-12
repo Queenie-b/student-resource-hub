@@ -39,8 +39,8 @@
 }
 
 .my-resources-tabs button.active {
-    color: #2563eb;
-    border-bottom-color: #2563eb;
+    color: #907cc4;
+    border-bottom-color: #907cc4;
 }
 
 .my-resources-tabs button span {
@@ -81,7 +81,7 @@
     align-items: center;
     justify-content: center;
     background: #f0f4ff;
-    color: #2563eb;
+    color: #3a1a49;
     padding: 12px;
     border-radius: 9px;
 }
@@ -166,7 +166,7 @@
 }
 
 .edit-resource-form {
-    background: white;
+    background: rgb(55, 40, 70);
     width: 100%;
     max-width: 500px;
     max-height: 90vh;
@@ -226,7 +226,7 @@
     border-radius: 7px;
     cursor: pointer;
     border: 1px solid #ddd;
-    background: white;
+    background: rgb(156, 70, 70);
 }
 
 .edit-resource-actions button[type="submit"] {

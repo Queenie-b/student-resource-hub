@@ -106,7 +106,7 @@ function Resource ({resources}) {
                             </a>
                         </div>
 
-                        <div className="save-resource" title='Save resource'onClick={() => onTogglesave(resource.id)}>
+                        <div className="save-resource" title='Save resource'onClick={() => onTogglesave(resource)}>
                             <Bookmark/>
                         </div>
                     </div>

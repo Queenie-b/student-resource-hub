@@ -5,6 +5,7 @@ import Resource from './components/pages/Resources/Resource'
 import AddResources from './components/pages/AddResources/AddResources'
 import { useState } from 'react'
 import MyResources from './components/pages/MyResources/MyResources'
+import SignUp from './components/pages/SignUp/SignUp';
 
 
 const initialResources = [
@@ -70,12 +71,85 @@ const initialResources = [
     }
 ];
 
-const currentUser = 'user-001';
-
 const App = () => {
 
   const [resources, setResources] =  useState(initialResources);
   const [savedResourceIds, setSavedResourceIds] = useState([]);
+
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  function handleSignUp(name, email, password){
+
+    const cleanName = name.trim();
+    const cleanEmail = email.trim().toLowerCase();
+
+    if (!cleanName || !cleanEmail || !password.trim()){
+      alert("Please filll in the fields.");
+      return false;
+    }
+
+    const existingUser = users.find(
+      user => user.email === cleanEmail
+    );
+
+    if (existingUser) {
+      alert("An account with this email already exists.");
+      return false;
+    }
+
+    const newUser = {
+      id: Date.now(),
+      name: cleanName,
+      email: cleanEmail,
+      password: password
+    };
+
+    setUsers(prevUsers => [
+      ...prevUsers, 
+      newUser
+    ]);
+
+    setCurrentUser({
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email
+    });
+
+    alert(`Welcome, ${newUser.name}!`);
+    return true;
+
+  }
+
+  function handleSignIn(email, password){
+    const cleanEmail = email.trim().toLowerCase();
+
+    const user = users.find(
+        user =>
+            user.email === cleanEmail &&
+            user.password === password
+    );
+
+    if (!user) {
+        alert("Incorrect email or password.");
+        return false;
+    }
+
+    setCurrentUser({
+        id: user.id,
+        name: user.name,
+        email: user.email
+    });
+
+    alert(`Welcome back, ${user.name}!`);
+    return true;
+
+  }
+
+  function handleSignOut() {
+    setCurrentUser(null);
+    alert("You have been signed out.");
+}
 
   function addResource(newResource) {
     setResources(prevResources => [
@@ -83,7 +157,7 @@ const App = () => {
       {
         ...newResource,
         id: Date.now(),
-        ownerId: currentUser
+        ownerId: currentUser.id
       }
     ]);
   }
@@ -134,9 +208,15 @@ const App = () => {
              />
            }
         />
+        <Route
+            path="/signup"
+            element={<SignUp onSignUp={handleSignUp} />}
+        />
       </Routes>
     </div>
   )
 }
 
 export default App
+
+
