@@ -36,7 +36,7 @@ const Header = () => {
                           <span>Add Resources</span>                        
                     </button>
 
-                    <button type='add-note'>
+                    <button type="button" onClick={() => { navigate('/add-note'); setIsOpen(false); }}>
                         <NotebookPen className='add-note'/>
                         <span>Add Note</span>
                     </button>
@@ -48,7 +48,7 @@ const Header = () => {
                 </div>
             )}
         </div>
-        <button type="button" className="signIn">Sign In</button>
+        <button type="button" className="signIn" onClick={() => navigate('/signin')}>Sign In</button>
       </div>
     </header>
   )

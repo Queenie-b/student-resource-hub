@@ -3,20 +3,33 @@ import { ArrowRight, BookOpen, FileText, Search, Video } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 import './Home.css'
 
-const resources = [
-  { title: 'Research paper essentials', type: 'Templates', detail: 'A clear structure for your next research project.', icon: FileText },
-  { title: 'Exam preparation workshop', type: 'Videos', detail: 'Build a revision plan and feel ready for exam day.', icon: Video },
-]
-
-const Home = () => {
+const Home = ({ resources = [] }) => {
   const [query, setQuery] = useState('')
   const visibleResources = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
-    if (!normalizedQuery) return resources
-    return resources.filter(({ title, type, detail }) =>
-      `${title} ${type} ${detail}`.toLowerCase().includes(normalizedQuery),
-    )
-  }, [query])
+    const matchingResources = normalizedQuery
+      ? resources.filter(resource => [
+          resource.title,
+          resource.subject,
+          resource.category,
+          resource.format,
+          resource.description,
+          resource.content?.replace(/<[^>]*>/g, ' '),
+        ].filter(Boolean).join(' ').toLowerCase().includes(normalizedQuery))
+      : resources
+
+    return matchingResources.map(resource => {
+      const Icon = resource.category === 'Videos' ? Video : resource.category === 'Textbook' ? BookOpen : FileText
+      const detail = resource.isNote
+        ? resource.content?.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+        : resource.description
+      return {
+        ...resource,
+        icon: Icon,
+        detail: detail || `${resource.subject} · ${resource.format}`,
+      }
+    })
+  }, [query, resources])
 
   return (
     <main className="home-page page-fade">
@@ -51,14 +64,14 @@ const Home = () => {
 
         {visibleResources.length > 0 ? (
           <div className="resource-grid">
-            {visibleResources.map(({ title, type, detail, icon: Icon }) => (
-              <article className="resource-card" key={title}>
+            {visibleResources.map(({ id, title, category, detail, icon: Icon }) => (
+              <article className="resource-card" key={id}>
                 <div className="resource-icon"><Icon size={22} aria-hidden="true" /></div>
-                <p className="resource-type">{type}</p>
+                <p className="resource-type">{category}</p>
                 <h3>{title}</h3>
                 <p className="resource-detail">{detail}</p>
-                <NavLink className="link-to-resources" to="/resources">
-                  Explore <ArrowRight size={16} aria-hidden="true" />
+                <NavLink className="link-to-resources" to={`/resources?search=${encodeURIComponent(title)}`}>
+                  View resource <ArrowRight size={16} aria-hidden="true" />
                 </NavLink>
               </article>
             ))}

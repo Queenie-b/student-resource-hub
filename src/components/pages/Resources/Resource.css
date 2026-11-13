@@ -161,6 +161,52 @@
   box-shadow: 0 11px 24px rgba(45, 33, 71, .08);
 }
 
+.resource-file a,
+.resource-file button,
+.save-resource {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 0;
+  border-radius: 9px;
+  background: #f5f1fc;
+  color: #7352bd;
+  cursor: pointer;
+  text-decoration: none;
+}
+.resource-file a:hover,
+.resource-file button:hover,
+.save-resource:hover,
+.save-resource.saved { background: #eee7fa; color: #563796; }
+.save-resource svg { width: 19px; height: 19px; }
+
+.published-note-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(24, 18, 40, .52);
+}
+.published-note-dialog {
+  position: relative;
+  width: min(100%, 680px);
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 16px;
+  background: #fff;
+  color: #302a42;
+  box-shadow: 0 20px 60px rgba(24, 18, 40, .22);
+  box-sizing: border-box;
+}
+.published-note-dialog > p { margin: 0 0 7px; color: #8063be; font-size: 12px; }
+.published-note-dialog h2 { margin: 0 34px 18px 0; color: #29233d; font-size: 24px; }
+.published-note-dialog > div { padding-top: 16px; border-top: 1px solid #eeeaf4; font-size: 15px; line-height: 1.7; }
+.published-note-close { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border: 0; border-radius: 8px; background: #f5f1fc; color: #514a60; font-size: 24px; cursor: pointer; }
+
 .resource-icon {
   display: grid;
   width: 48px;

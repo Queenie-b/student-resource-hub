@@ -1,6 +1,7 @@
 import './Resource.css'
 import { Search, FileText, BookOpen, Video, Eye, Bookmark } from 'lucide-react'
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 
 
@@ -13,15 +14,20 @@ const categories = [
     "Notes",
 ];
 
-function Resource ({resources}) {
+function Resource ({resources, savedResourceIds = [], onToggleSave = () => {}}) {
 
-    const [search, setSearch] = useState("");
+    const [searchParams] = useSearchParams();
+    const [search, setSearch] = useState(() => searchParams.get('search') || '');
     const [activeCategory, setActiveCategory] = useState("All");
+    const [viewingNote, setViewingNote] = useState(null);
 
     const filteredResources =  resources.filter((resource) => {
         const matchesSearch = 
-            resource.title.toLowerCase().includes(search.toLowerCase()) ||
-            resource.subject.toLowerCase().includes(search.toLowerCase());
+            [resource.title, resource.subject, resource.category, resource.description, resource.content]
+                .filter(Boolean)
+                .join(' ')
+                .toLowerCase()
+                .includes(search.toLowerCase());
 
         const matchesCategory = 
             activeCategory === "All" ||
@@ -101,14 +107,25 @@ function Resource ({resources}) {
                         </div>
 
                         <div className="resource-file">
-                            <a href={resource.file} target="_blank" rel="noopener noreferrer">
-                                <Eye className='resource-file-download'/>
-                            </a>
+                            {resource.isNote ? (
+                                <button type="button" aria-label={`Read ${resource.title}`} onClick={() => setViewingNote(resource)}>
+                                    <Eye className='resource-file-download'/>
+                                </button>
+                            ) : (
+                                <a href={resource.file} target="_blank" rel="noopener noreferrer" aria-label={`Open ${resource.title}`}>
+                                    <Eye className='resource-file-download'/>
+                                </a>
+                            )}
                         </div>
 
-                        <div className="save-resource" title='Save resource'onClick={() => onTogglesave(resource)}>
-                            <Bookmark/>
-                        </div>
+                        <button
+                            type="button"
+                            className={`save-resource ${savedResourceIds.includes(resource.id) ? 'saved' : ''}`}
+                            title={savedResourceIds.includes(resource.id) ? 'Remove saved resource' : 'Save resource'}
+                            aria-label={savedResourceIds.includes(resource.id) ? 'Remove saved resource' : 'Save resource'}
+                            aria-pressed={savedResourceIds.includes(resource.id)}
+                            onClick={() => onToggleSave(resource.id)}
+                        ><Bookmark /></button>
                     </div>
                 )) 
             ) : (
@@ -120,6 +137,18 @@ function Resource ({resources}) {
             )}
         </div>
 
+        {viewingNote && (
+            <div className="published-note-overlay" role="presentation" onMouseDown={event => {
+                if (event.target === event.currentTarget) setViewingNote(null);
+            }}>
+                <article className="published-note-dialog" role="dialog" aria-modal="true" aria-labelledby="published-note-title">
+                    <button className="published-note-close" type="button" onClick={() => setViewingNote(null)} aria-label="Close note">×</button>
+                    <p>{viewingNote.subject}{viewingNote.noteCategory ? ` · ${viewingNote.noteCategory}` : ''}</p>
+                    <h2 id="published-note-title">{viewingNote.title}</h2>
+                    <div dangerouslySetInnerHTML={{ __html: viewingNote.content }} />
+                </article>
+            </div>
+        )}
     </main>
   );
 }

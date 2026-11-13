@@ -6,6 +6,8 @@ import AddResources from './components/pages/AddResources/AddResources'
 import { useState } from 'react'
 import MyResources from './components/pages/MyResources/MyResources'
 import SignUp from './components/pages/SignUp/SignUp';
+import SignIn from './components/pages/SignIn/SignIn';
+import AddNote from './components/pages/AddNote/AddNote';
 
 
 const initialResources = [
@@ -78,6 +80,7 @@ const App = () => {
 
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [notes, setNotes] = useState([]);
 
   function handleSignUp(name, email, password){
 
@@ -190,11 +193,44 @@ const App = () => {
         );
     }
 
+    const handleAddNote = (newNote) => {
+      setNotes(prevNotes => [...prevNotes, {
+        ...newNote,
+        id: Date.now(),
+        ownerId: currentUser?.id ?? 'guest',
+        published: false
+      }]);
+    };
+
+    const handleUpdateNote = (noteId, updates) => {
+      setNotes(prevNotes => prevNotes.map(note =>
+        note.id === noteId ? { ...note, ...updates } : note
+      ));
+    };
+
+    const handlePublishNote = (noteId) => {
+      const note = notes.find(item => item.id === noteId);
+      if (!note || note.published) return;
+
+      setResources(prevResources => [...prevResources, {
+        ...note,
+        description: note.content,
+        category: 'Notes',
+        noteCategory: note.category,
+        format: 'NOTE',
+        file: null,
+        isNote: true
+      }]);
+      setNotes(prevNotes => prevNotes.map(item =>
+        item.id === noteId ? { ...item, published: true } : item
+      ));
+    };
+
   return (
     <div>
       <Header/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home resources={resources} />} />
         <Route path="/resources" element={<Resource resources={resources} savedResourceIds={savedResourceIds} onToggleSave={toggleSavedResource}/>}/>
         <Route path='/add-resource' element={<AddResources onAddResource={addResource}/>}/>
         <Route path='/my-resources' element={
@@ -211,6 +247,14 @@ const App = () => {
         <Route
             path="/signup"
             element={<SignUp onSignUp={handleSignUp} />}
+        />
+        <Route
+            path="/signin"
+            element={<SignIn onSignIn={handleSignIn} />}
+        />
+        <Route
+          path="/add-note"
+          element={<AddNote notes={notes.filter(note => note.ownerId === (currentUser?.id ?? 'guest'))} onAddNote={handleAddNote} onUpdateNote={handleUpdateNote} onPublishNote={handlePublishNote} />}
         />
       </Routes>
     </div>
